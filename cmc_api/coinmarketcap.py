@@ -12,6 +12,7 @@ class CoinMarketCap:
         'crypto': 'cryptocurrency',
         'exchange': 'exchange',
         'fiat': 'fiat',
+        'key': 'key',
     }
 
     def __init__(self, api_key=API_KEY, sandbox=False):
@@ -37,7 +38,7 @@ class CoinMarketCap:
         session.headers.update(headers)
         return session
 
-    def _insert_cat(self, text, cat, options=['crypto', 'exchange', 'fiat']):
+    def _insert_cat(self, text, cat, options=['crypto', 'exchange']):
         if cat in options:
             return text.format(self.categories[cat])
         else:
@@ -77,12 +78,21 @@ class CoinMarketCap:
         """
         pass
 
-    def map(self, cat='crypto', **kwargs):
-        url = self._insert_cat(self.BASE_URL + '/{}/map', cat)
-        return self._get_url(url, kwargs)
+    def map(self, cat='crypto', **parameters):
+        url = self._insert_cat(self.BASE_URL + '/{}/map', cat,
+              ['crypto', 'exchange', 'fiat'])
+        return self._get_url(url, parameters)
 
-    def listings(self, cat='crypto', **kwargs):
+    def listings(self, cat='crypto', **parameters):
         url = self._insert_cat(self.BASE_URL + '/{}/listings/latest', cat)
-        return self._get_url(url, kwargs)
+        return self._get_url(url, parameters)
+
+    def info(self, cat='crypto', **parameters):
+        url = self._insert_cat(self.BASE_URL + '/{}/info', cat, 
+              ['crypto', 'exchange', 'key'])
+        return self._get_url(url, parameters)
+
+    def key_info(self):
+        return self.info('key')
 
     
