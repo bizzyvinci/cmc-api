@@ -135,7 +135,7 @@ class CoinMarketCap:
 
         Parameters
         ----------
-        cat: {'crypto', 'exchange', 'fiat'}, default 'crypto'
+        cat: {'crypto', 'exchange'}, default 'crypto'
         **parameters:
             start: int, default 1
                 cat: {'crypto', 'exchange'}
@@ -198,6 +198,29 @@ class CoinMarketCap:
         url = self._insert_cat(self.BASE_URL + '/{}/listings/latest', cat)
         return self._get_url(url, parameters)
 
+    def historical_listings(self, cat='crypto', **parameters):
+        """
+        Get latest listings for cryptocurrency or exchange.
+
+        Parameters
+        ----------
+        cat: {'crypto', 'exchange'}, default 'crypto'
+        **parameters
+
+        Returns
+        -------
+        data: dict
+
+        References
+        ----------
+        .. [1] `crypto historical listings
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsHistorical>`_
+        .. [2] `exchange historical listings
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeListingsHistorical>`_
+        """
+        url = self._insert_cat(self.BASE_URL + '/{}/listings/historical', cat)
+        return self._get_url(url, parameters)
+
     def info(self, cat='crypto', **parameters):
         """
         Get Metadata for cryptocurrency or exchange.
@@ -236,3 +259,25 @@ class CoinMarketCap:
         """
         return self.info('key')
 
+    def quotes(self, cat='crypto', **parameters):
+        """
+        Get latest quotes for cryptocurrency or exchange.
+
+        Parameters
+        ----------
+        cat: {'crypto', 'exchange'}, default 'crypto'
+        **parameters
+
+        Returns
+        -------
+        data: dict
+
+        References
+        ----------
+        .. [1] `crypto quotes
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest>`_
+        .. [2] `exchange quotes
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeQuotesLatest>`_
+        """
+        url = self._insert_cat(self.BASE_URL + '/{}/quotes/latest', cat)
+        return self._get_url(url, parameters)
