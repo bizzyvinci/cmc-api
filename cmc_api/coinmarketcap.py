@@ -1,7 +1,44 @@
-import os
+import functools
 import logging
+import os
 from requests import Session
 from .exceptions import *
+
+
+def parse_param(key, value):
+    """
+    Parse value to int or str,
+    which are the valid datatype for request parameters.
+    """
+    if isinstance(value, int) or isinstance(value, str):
+        return value
+    elif isinstance(value, list) or isinstance(value, tuple)\
+            or isinstance(value, set):
+        return ','.join([str(x) for x in value])
+    else:
+        raise ValueError(
+            'Got an invalid datatype for parameter {}. '.format(key)
+            'Try converting it to int, str, list, tuple or set.')
+
+
+def parameters_parser(*excluded_parameters):
+    """
+    This decorator parses parameters for requests.
+
+    Parameters:
+    *excluded_parameters: parameters that are basic to function,
+        and therefore to be excluded from the parameters for requests.
+    """
+    def decorator(function):
+        @functools.wraps(function)
+        def wrapper(*args, **parameters):
+            for key,value in parameters.items():
+                if key not in excluded_parameters:
+                    parameters[key] = parse_param(key, value)
+            return function(*args, **parameter)
+        return wrapper
+    return decorator
+
 
 class CoinMarketCap:
     PRO_BASE_URL = 'https://pro-api.coinmarketcap.com/v1'
