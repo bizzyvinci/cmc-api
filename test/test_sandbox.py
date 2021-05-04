@@ -1,6 +1,33 @@
 import pytest
 from requests import Session
 from cmc_api import *
+from cmc_api.coinmarketcap import parse_param, parameters_parser
+
+
+def test_parse_param():
+    assert parse_param('id', 4) == 4
+    assert parse_param('symbol', 'BTC') == 'BTC'
+    assert parse_param('price_min', 250.50) == 250.50
+    assert parse_param('symbol', ['BTC', 'ETH', 'USD']) == 'BTC,ETH,USD'
+    assert parse_param('id', (1,2,3)) == '1,2,3'
+    # Set is unordered
+    result = parse_param('aux', {'id', 'name'})
+    assert isinstance(result, str)
+    assert  'id' in result and 'name' in result
+    with pytest.raises(ValueError):
+        parse_param('x', {1:2, 3:4})
+
+
+def test_parameters_parser():
+    parser = parameters_parser('cat', 'year')
+    def func(cat, year='2020', **parameters):
+        return cat, year, parameters
+    function = parser(func)
+    cat, year, parameters = function('a', year=[2021], id=[1,2,3])
+    assert cat == 'a'
+    assert year == [2021]
+    assert parameters['id'] == '1,2,3'
+
 
 cmc = CoinMarketCap(sandbox=True)
 
