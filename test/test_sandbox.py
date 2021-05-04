@@ -10,7 +10,8 @@ def test_parse_param():
     assert parse_param('price_min', 250.50) == 250.50
     assert parse_param('symbol', ['BTC', 'ETH', 'USD']) == 'BTC,ETH,USD'
     assert parse_param('id', (1,2,3)) == '1,2,3'
-    # Set is unordered
+    # Set is unordered,
+    # therefore it could be 'id,name' or 'name,id'.
     result = parse_param('aux', {'id', 'name'})
     assert isinstance(result, str)
     assert  'id' in result and 'name' in result
