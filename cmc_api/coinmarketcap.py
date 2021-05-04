@@ -10,15 +10,16 @@ def parse_param(key, value):
     Parse value to int or str,
     which are the valid datatype for request parameters.
     """
-    if isinstance(value, int) or isinstance(value, str):
+    if isinstance(value, int) or isinstance(value, str)\
+            or isinstance(value, float):
         return value
     elif isinstance(value, list) or isinstance(value, tuple)\
             or isinstance(value, set):
         return ','.join([str(x) for x in value])
     else:
         raise ValueError(
-            'Got an invalid datatype for parameter {}. '.format(key)
-            'Try converting it to int, str, list, tuple or set.')
+            'Got an invalid datatype for parameter {}. Try converting it to '
+            'str, int, float, list, tuple or set.'.format(key))
 
 
 def parameters_parser(*excluded_parameters):
@@ -35,7 +36,7 @@ def parameters_parser(*excluded_parameters):
             for key,value in parameters.items():
                 if key not in excluded_parameters:
                     parameters[key] = parse_param(key, value)
-            return function(*args, **parameter)
+            return function(*args, **parameters)
         return wrapper
     return decorator
 
