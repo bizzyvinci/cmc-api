@@ -120,6 +120,7 @@ class CoinMarketCap:
         """
         pass
 
+    @parameters_parser('cat')
     def map(self, cat='crypto', **parameters):
         """
         Get ID map for cryptocurrency, exchange or fiat.
@@ -168,6 +169,7 @@ class CoinMarketCap:
               ['crypto', 'exchange', 'fiat'])
         return self._get_url(url, parameters)
 
+    @parameters_parser('cat')
     def listings(self, cat='crypto', **parameters):
         """
         Get latest listings for cryptocurrency or exchange.
@@ -237,6 +239,7 @@ class CoinMarketCap:
         url = self._insert_cat(self.BASE_URL + '/{}/listings/latest', cat)
         return self._get_url(url, parameters)
 
+    @parameters_parser('cat')
     def historical_listings(self, cat='crypto', **parameters):
         """
         Get latest listings for cryptocurrency or exchange.
@@ -260,6 +263,7 @@ class CoinMarketCap:
         url = self._insert_cat(self.BASE_URL + '/{}/listings/historical', cat)
         return self._get_url(url, parameters)
 
+    @parameters_parser('cat')
     def info(self, cat='crypto', **parameters):
         """
         Get Metadata for cryptocurrency or exchange.
@@ -298,6 +302,7 @@ class CoinMarketCap:
         """
         return self.info('key')
 
+    @parameters_parser('cat')
     def quotes(self, cat='crypto', **parameters):
         """
         Get latest quotes for cryptocurrency or exchange.
