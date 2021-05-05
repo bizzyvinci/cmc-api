@@ -130,15 +130,6 @@ class CoinMarketCap:
         cat: {'crypto', 'exchange', 'fiat'}, default 'crypto'
             The category to get map for.
         **parameters:
-            aux: default "platform,first_historical_data,last_historical_data,is_active"
-                all: platform,first_historical_data,last_historical_data,is_active,status
-                cat: {'crypto', 'exchange'}
-            crypto_id: str
-                cat: {'exchange'}
-            include_metals: bool, default False
-                cat: {'fiat'}
-            limit: int {1...5000}, optional
-                cat: {'crypto', 'exchange', 'fiat'}
             listing_status: str or sequence of strs, default 'active'
                 option: {'active', 'inactive', 'untracked'}.
                 cat: {'crypto', 'exchange'}
@@ -146,11 +137,20 @@ class CoinMarketCap:
                 cat: {'exchange'}
             start: int, default 1
                 cat: {'crypto', 'exchange', fiat'}
+            limit: int {1...5000}, optional
+                cat: {'crypto', 'exchange', 'fiat'}
             sort: str, default 'id'
                 option: {'id', 'cmc_rank', 'name', 'volume_24h'}
                 cat: {'crypto', 'exchange', 'fiat'}
             symbol: str or sequence of strs, optional
                 cat: {'crypto'}
+            crypto_id: str
+                cat: {'exchange'}
+            include_metals: bool, default False
+                cat: {'fiat'}
+            aux: default "platform,first_historical_data,last_historical_data,is_active"
+                all: platform,first_historical_data,last_historical_data,is_active,status
+                cat: {'crypto', 'exchange'}
         
         Returns
         -------
