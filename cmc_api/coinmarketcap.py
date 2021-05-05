@@ -1,6 +1,7 @@
 import functools
 import logging
 import os
+from datetime import datetime, date
 from requests import Session
 from .exceptions import *
 
@@ -10,12 +11,12 @@ def parse_param(key, value):
     Parse value to int or str,
     which are the valid datatype for request parameters.
     """
-    if isinstance(value, int) or isinstance(value, str)\
-            or isinstance(value, float):
+    if isinstance(value, (str, int, float)):
         return value
-    elif isinstance(value, list) or isinstance(value, tuple)\
-            or isinstance(value, set):
+    elif isinstance(value, (list, tuple, set)):
         return ','.join([str(x) for x in value])
+    elif isinstance(value, (datetime, date)):
+        return value.isoformat()
     else:
         raise ValueError(
             'Got an invalid datatype for parameter {}. Try converting it to '
