@@ -1,4 +1,5 @@
 import pytest
+from datetime import date, datetime
 from requests import Session
 from cmc_api import *
 from cmc_api.coinmarketcap import parse_param, parameters_parser
@@ -10,6 +11,8 @@ def test_parse_param():
     assert parse_param('price_min', 250.50) == 250.50
     assert parse_param('symbol', ['BTC', 'ETH', 'USD']) == 'BTC,ETH,USD'
     assert parse_param('id', (1,2,3)) == '1,2,3'
+    assert parse_param('date', datetime(2020,1,1)) == '2020-01-01T00:00:00'
+    assert parse_param('date', date(2020,1,1)) == '2020-01-01'
     # Set is unordered,
     # therefore it could be 'id,name' or 'name,id'.
     result = parse_param('aux', {'id', 'name'})
