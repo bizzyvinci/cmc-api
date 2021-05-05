@@ -87,6 +87,25 @@ def test_map_fiat():
     assert result[1]['id'] == 2782
 
 
+def test_map_with_parameters():
+    parameters = {
+        'limit': 5,
+        'sort': 'cmc_rank',
+    }
+    result = cmc.map(**parameters)
+    assert len(result) == 5
+    for i,x in enumerate(result):
+        assert x['rank'] == i+1
+
+
+def test_map_with_kw_parameters():
+    slug = ['binance', 'cryptsy', 'poloniex', 'luno', 'wex']
+    result = cmc.map('exchange', slug=slug)
+    assert len(result) == len(slug)
+    for x in result:
+        assert x['slug'] in slug
+
+
 def test_map_bad_cat():
     with pytest.raises(ValueError):
         result = cmc.map('not_in_categories')
