@@ -325,3 +325,27 @@ class CoinMarketCap:
         """
         url = self._insert_cat(self.BASE_URL + '/{}/quotes/latest', cat)
         return self._get_url(url, parameters)
+
+    @parameters_parser('cat')
+    def historical_quotes(self, cat='crypto', **parameters):
+        """
+        Get historical quotes for cryptocurrency or exchange.
+
+        Parameters
+        ----------
+        cat: {'crypto', 'exchange'}, default 'crypto'
+        **parameters
+
+        Returns
+        -------
+        data: dict
+
+        References
+        ----------
+        .. [1] `crypto historical quotes
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesHistorical>`_
+        .. [2] `exchange quotes
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeQuotesHistorical>`_
+        """
+        url = self._insert_cat(self.BASE_URL + '/{}/quotes/historical', cat)
+        return self._get_url(url, parameters)
