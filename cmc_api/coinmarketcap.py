@@ -20,7 +20,7 @@ def parse_param(key, value):
     else:
         raise ValueError(
             'Got an invalid datatype for parameter {}. Try converting it to '
-            'str, int, float, list, tuple or set.'.format(key))
+            'str, int, float, list, tuple, set, datetime or date.'.format(key))
 
 
 def parameters_parser(*excluded_parameters):
@@ -154,16 +154,16 @@ class CoinMarketCap:
         
         Returns
         -------
-        data: dict
+        data: list
 
         References
         ----------
-        .. [1] `crypto map
+        .. [1] `/v1/cryptocurrency/map
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyMap>`_
-        .. [2] `fiat map
-            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1FiatMap>`_
-        .. [3] `exchange map
+        .. [2] `/v1/exchange/map
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeMap>`_
+        .. [3] `/v1/fiat/map
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1FiatMap>`_
         """
         url = self._insert_cat(self.BASE_URL + '/{}/map', cat,
               ['crypto', 'exchange', 'fiat'])
@@ -227,13 +227,13 @@ class CoinMarketCap:
 
         Returns
         -------
-        data: dict
+        data: list
 
         References
         ----------
-        .. [1] `crypto listings
+        .. [1] `/v1/cryptocurrency/listings/latest
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsLatest>`_
-        .. [2] `exchange listings
+        .. [2] `/v1/exchange/listings/latest
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeListingsLatest>`_
         """
         url = self._insert_cat(self.BASE_URL + '/{}/listings/latest', cat)
@@ -251,13 +251,13 @@ class CoinMarketCap:
 
         Returns
         -------
-        data: dict
+        data: list
 
         References
         ----------
-        .. [1] `crypto historical listings
+        .. [1] `/v1/cryptocurrency/listings/historical
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyListingsHistorical>`_
-        .. [2] `exchange historical listings
+        .. [2] `/v1/exchange/listings/historical
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeListingsHistorical>`_
         """
         url = self._insert_cat(self.BASE_URL + '/{}/listings/historical', cat)
@@ -287,10 +287,12 @@ class CoinMarketCap:
 
         References
         ----------
-        .. [1] `crypto info
+        .. [1] `/v1/cryptocurrency/info
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyInfo>`_
-        .. [2] `exchange info
+        .. [2] `/v1/exchange/info
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeInfo>`_
+        .. [3] `/v1/key/info
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1KeyInfo>`_
         """
         url = self._insert_cat(self.BASE_URL + '/{}/info', cat, 
               ['crypto', 'exchange', 'key'])
@@ -318,9 +320,9 @@ class CoinMarketCap:
 
         References
         ----------
-        .. [1] `crypto quotes
+        .. [1] `/v1/cryptocurrency/quotes/latest
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest>`_
-        .. [2] `exchange quotes
+        .. [2] `/v1/exchange/quotes/latest
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeQuotesLatest>`_
         """
         url = self._insert_cat(self.BASE_URL + '/{}/quotes/latest', cat)
@@ -342,9 +344,9 @@ class CoinMarketCap:
 
         References
         ----------
-        .. [1] `crypto historical quotes
+        .. [1] `/v1/cryptocurrency/quotes/historical
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesHistorical>`_
-        .. [2] `exchange quotes
+        .. [2] `/v1/exchange/quotes/historical
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeQuotesHistorical>`_
         """
         url = self._insert_cat(self.BASE_URL + '/{}/quotes/historical', cat)
