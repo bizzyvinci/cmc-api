@@ -44,7 +44,7 @@ def parameters_parser(*excluded_parameters):
 
 class CoinMarketCap:
     PRO_BASE_URL = 'https://pro-api.coinmarketcap.com/v1'
-    SANDBOX_BASE_URL = 'https://sandbox-api.coinmarketcap.com/v1'
+    NON_PRO_BASE_URL = 'https://{}-api.coinmarketcap.com/v1'
     SANDBOX_API_KEY = 'b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c'
     API_KEY = os.getenv('CMC_PRO_API_KEY')
     categories = {
@@ -54,10 +54,10 @@ class CoinMarketCap:
         'key': 'key',
     }
 
-    def __init__(self, api_key=API_KEY, sandbox=False):
-        if sandbox: 
+    def __init__(self, api_key=API_KEY, root='pro'):
+        if root!='pro':
             api_key = self.SANDBOX_API_KEY
-            self.BASE_URL = self.SANDBOX_BASE_URL
+            self.BASE_URL = self.NON_PRO_BASE_URL.format(root)
         else:
             self.BASE_URL = self.PRO_BASE_URL
         if not api_key:

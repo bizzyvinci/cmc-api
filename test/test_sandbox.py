@@ -33,7 +33,7 @@ def test_parameters_parser():
     assert parameters['id'] == '1,2,3'
 
 
-cmc = CoinMarketCap(sandbox=True)
+cmc = CoinMarketCap(root='sandbox')
 
 
 def test_base_url(base_url):
