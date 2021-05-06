@@ -311,7 +311,7 @@ class CoinMarketCap:
 
         Parameters
         ----------
-        cat: {'crypto', 'exchange'}, default 'crypto'
+        cat: {'crypto', 'exchange', 'global-metrics'}, default 'crypto'
         **parameters
 
         Returns
@@ -324,8 +324,11 @@ class CoinMarketCap:
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest>`_
         .. [2] `/v1/exchange/quotes/latest
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeQuotesLatest>`_
+        .. [3] `/v1/global-metrics/quotes/latest
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1GlobalmetricsQuotesLatest>`_
         """
-        url = self._insert_cat(self.BASE_URL + '/{}/quotes/latest', cat)
+        url = self._insert_cat(self.BASE_URL + '/{}/quotes/latest', cat,
+              ['crypto', 'exchange', 'global-metrics'])
         return self._get_url(url, parameters)
 
     @parameters_parser('cat')
@@ -335,7 +338,7 @@ class CoinMarketCap:
 
         Parameters
         ----------
-        cat: {'crypto', 'exchange'}, default 'crypto'
+        cat: {'crypto', 'exchange', 'global-metrics'}, default 'crypto'
         **parameters
 
         Returns
@@ -348,6 +351,9 @@ class CoinMarketCap:
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesHistorical>`_
         .. [2] `/v1/exchange/quotes/historical
             <https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeQuotesHistorical>`_
+        .. [3] `/v1/global-metrics/quotes/historical
+            <https://coinmarketcap.com/api/documentation/v1/#operation/getV1GlobalmetricsQuotesHistorical>`_
         """
-        url = self._insert_cat(self.BASE_URL + '/{}/quotes/historical', cat)
+        url = self._insert_cat(self.BASE_URL + '/{}/quotes/historical', cat,
+              ['crypto', 'exchange', 'global-metrics'])
         return self._get_url(url, parameters)
