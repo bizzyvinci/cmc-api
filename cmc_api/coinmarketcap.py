@@ -43,11 +43,29 @@ def parameters_parser(*excluded_parameters):
 
 
 class CoinMarketCap:
-    PRO_BASE_URL = 'https://pro-api.coinmarketcap.com/v1'
-    NON_PRO_BASE_URL = 'https://{}-api.coinmarketcap.com/v1'
-    SANDBOX_API_KEY = 'b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c'
-    API_KEY = os.getenv('CMC_PRO_API_KEY')
-    categories = {
+    """
+    A class to initiate coinmarketcap api.
+
+    Parameters
+    ----------
+    api_key: str, default os.getenv('CMC_PRO_API_KEY')
+        API key to use with pro-api
+    root: str, default 'pro'
+        The root of api e.g 'pro' for `pro-api`
+        and 'sandbox' for `sandox-api`
+
+    Returns
+    -------
+    object
+
+    Attributes
+    ----------
+    CoinMarketCap.api_key: str
+        API KEY.
+    CoinMarketCap.session: requests.Session
+        Session used for requests.
+    """
+    _categories = {
         'crypto': 'cryptocurrency',
         'exchange': 'exchange',
         'fiat': 'fiat',
@@ -55,15 +73,14 @@ class CoinMarketCap:
         'global-metrics': 'global-metrics',
     }
 
-    def __init__(self, api_key=API_KEY, root='pro'):
-        if root!='pro':
-            api_key = self.SANDBOX_API_KEY
-            self.BASE_URL = self.NON_PRO_BASE_URL.format(root)
+    def __init__(self, api_key=os.getenv('CMC_PRO_API_KEY'), root='pro'):
+        self.BASE_URL = 'https://{}-api.coinmarketcap.com/v1'.format(root)
+        if root=='pro':
+            if not api_key:
+                message = "No key is provided for pro-api."
+                raise CMCAPIException(message)
         else:
-            self.BASE_URL = self.PRO_BASE_URL
-        if not api_key:
-            message = "No key is provided"
-            raise CMCAPIException(message)
+            api_key = None
         self.api_key = api_key
         self.session = self._init_session(api_key)
 
@@ -72,17 +89,18 @@ class CoinMarketCap:
         """Initialize session which would be used for requests."""
         session = Session()
         headers = {
-            'X-CMC_PRO_API_KEY': api_key,
             'Accepts': 'application/json',
             'Accept-Encoding': 'deflate, gzip',
         }
+        if api_key is not None:
+            headers['X-CMC_PRO_API_KEY'] = api_key
         session.headers.update(headers)
         return session
 
     def _insert_cat(self, text, cat, options=['crypto', 'exchange']):
         """Insert cat into text if in options."""
         if cat in options:
-            return text.format(self.categories[cat])
+            return text.format(self._categories[cat])
         else:
             raise ValueError(
                 "Invalid category ({}) provided. "
@@ -113,14 +131,6 @@ class CoinMarketCap:
                           response.status_code, error_message)
                 raise CMCAPIException(error_message)
 
-    @staticmethod
-    def _check_datetime_format(date_):
-        """
-        Check if date_ is ISO8601 format (eg. 2018-06-06T01:46:40Z)
-        or Unix time (eg. 1528249600).
-        """
-        pass
-
     @parameters_parser('cat')
     def map(self, cat='crypto', **parameters):
         """
@@ -130,7 +140,8 @@ class CoinMarketCap:
         ----------
         cat: {'crypto', 'exchange', 'fiat'}, default 'crypto'
             The category to get map for.
-        **parameters:
+        \*\*parameters: keyword arguments
+            Parameters to include in the request.
             listing_status: str or sequence of strs, default 'active'
                 option: {'active', 'inactive', 'untracked'}.
                 cat: {'crypto', 'exchange'}
@@ -178,7 +189,9 @@ class CoinMarketCap:
         Parameters
         ----------
         cat: {'crypto', 'exchange'}, default 'crypto'
-        **parameters:
+            The category to get listings for.
+        \*\*parameters: keyword arguments
+            Parameters to include in the request.
             start: int, default 1
                 cat: {'crypto', 'exchange'}
             limit: int {1...5000}, default 100
@@ -248,8 +261,10 @@ class CoinMarketCap:
         Parameters
         ----------
         cat: {'crypto', 'exchange'}, default 'crypto'
-        **parameters
-
+            The category to get historical for.
+        \*\*parameters:  keyword arguments
+            Parameters to include in the request.
+            
         Returns
         -------
         data: list
@@ -272,7 +287,10 @@ class CoinMarketCap:
         Parameters
         ----------
         cat: {'crypto', 'exchange', 'key'}, default 'crypto'
-        **parameters: id or slug or symbol is mandatory
+            The category to get info for.
+        \*\*parameters:  keyword arguments
+            Parameters to include in the request.
+            id or slug or symbol is mandatory
             id: str or sequence of strs
                 cat: {'crypto', 'exchange'}
             slug: str or sequence of strs
@@ -313,8 +331,10 @@ class CoinMarketCap:
         Parameters
         ----------
         cat: {'crypto', 'exchange', 'global-metrics'}, default 'crypto'
-        **parameters
-
+            The category to get quotes for.
+        \*\*parameters:  keyword arguments
+            Parameters to include in the request.
+            
         Returns
         -------
         data: dict
@@ -340,8 +360,10 @@ class CoinMarketCap:
         Parameters
         ----------
         cat: {'crypto', 'exchange', 'global-metrics'}, default 'crypto'
-        **parameters
-
+            The category to get historical quotes for.
+        \*\*parameters:  keyword arguments
+            Parameters to include in the request.
+            
         Returns
         -------
         data: dict

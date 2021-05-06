@@ -43,7 +43,6 @@ def test_base_url(base_url):
 def test_init_session():
     session = cmc._init_session(cmc.api_key)
     assert isinstance(session, Session)
-    assert 'X-CMC_PRO_API_KEY' in session.headers
     assert session.headers['Accepts'] == 'application/json'
 
 
