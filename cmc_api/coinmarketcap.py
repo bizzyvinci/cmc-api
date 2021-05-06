@@ -52,6 +52,7 @@ class CoinMarketCap:
         'exchange': 'exchange',
         'fiat': 'fiat',
         'key': 'key',
+        'global-metrics': 'global-metrics',
     }
 
     def __init__(self, api_key=API_KEY, root='pro'):
