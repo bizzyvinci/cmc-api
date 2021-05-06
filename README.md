@@ -54,10 +54,13 @@ python setup.py install
 ```
 
 ### Quick start guide
-Quick start with sandbox.
+#### Import
 ```python
 from cmc_api import CoinMarketCap
+```
 
+Quick start with sandbox.
+```python
 cmc = CoinMarketCap(root='sandbox')
 
 # List all cryptocurrency in coinmarketcap
@@ -67,7 +70,7 @@ cmc.map()
 cmc.listings()
 ```
 
-To use pro-api, A registered key from [coinmarketcap](https://coinmarketcap.com/api) is required. This key can be added to environment variable as `CMC_PRO_API_KEY`. After the api can be used as:
+To use pro-api, A registered key from [coinmarketcap](https://coinmarketcap.com/api) is required. This key can be added to environment variable as `CMC_PRO_API_KEY`. After, the api can be used as:
 ```python
 cmc = CoinMarketCap()
 ```
