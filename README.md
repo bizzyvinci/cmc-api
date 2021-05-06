@@ -101,3 +101,5 @@ data = cmc.listings(**parameters)
 ```
 
 [Documentation here]()
+
+[coinmarketcap best practices](https://coinmarketcap.com/api/documentation/v1/#section/Best-Practices)
