@@ -5,33 +5,33 @@
 This is up to date for coinmarketcap pro-api v1.27.0.
 
 ### Endpoints and their associated function
-| Endpoint							| Method			|
+| Endpoint                          | Method            |
 | --------------------------------- | ----------------- |
-| /v1/cryptocurrency/map			| map()				|
-| /v1/cryptocurrency/info			| info()			|
-| /v1/cryptocurrency/listings/latest| listings()		|
+| /v1/cryptocurrency/map            | map()             |
+| /v1/cryptocurrency/info           | info()            |
+| /v1/cryptocurrency/listings/latest| listings()        |
 | /v1/cryptocurrency/listings/historical| historical_listings() |
-| /v1/cryptocurrency/quotes/latest 	| quotes()			|
-| /v1/cryptocurrency/quotes/historical	| historical_quotes()	|
-| /v1/cryptocurrency/market-pairs/latest| -				|
-| /v1/cryptocurrency/ohlcv/latest 	| -					|
-| /v1/cryptocurrency/ohlcv/historical	| -				|
-| /v1/cryptocurrency/price-performance-stats/latest	| - |
-| /v1/exchange/map					| map('exchange')	|
-| /v1/exchange/info					| info('exchange')	|
-| /v1/exchange/listings/latest		| listings('exchange')	|
-| /v1/exchange/listings/historical	| historical_listings('exchange')	|
-| /v1/exchange/quotes/latest		| quotes('exchange')|
-| /v1/exchange/quotes/historical	| historical_quotes('exchange')	|
-| /v1/exchange/market-pairs/latest	| -					|
-| /v1/global-metrics/quotes/latest	| quotes('global-metrics')	|
-| /v1/global-metrics/quotes/historical	| historical_quotes('global-metrics')	|
-| /v1/tools/price-conversion		| -					|
-| /v1/blockchain/statistics/latest	| -					|
-| /v1/fiat/map						| map('fiat')		|
-| /v1/partners/flipside-crypto/fcas/listings/latest	| -	|
-| /v1/partners/flipside-crypto/fcas/quotes/latest	| -	|
-| /v1/key/info						| key_info() or info('key')	|
+| /v1/cryptocurrency/quotes/latest  | quotes()          |
+| /v1/cryptocurrency/quotes/historical  | historical_quotes()   |
+| /v1/cryptocurrency/market-pairs/latest| -             |
+| /v1/cryptocurrency/ohlcv/latest   | -                 |
+| /v1/cryptocurrency/ohlcv/historical   | -             |
+| /v1/cryptocurrency/price-performance-stats/latest | - |
+| /v1/exchange/map                  | map('exchange')   |
+| /v1/exchange/info                 | info('exchange')  |
+| /v1/exchange/listings/latest      | listings('exchange')  |
+| /v1/exchange/listings/historical  | historical_listings('exchange')   |
+| /v1/exchange/quotes/latest        | quotes('exchange')|
+| /v1/exchange/quotes/historical    | historical_quotes('exchange') |
+| /v1/exchange/market-pairs/latest  | -                 |
+| /v1/global-metrics/quotes/latest  | quotes('global-metrics')  |
+| /v1/global-metrics/quotes/historical  | historical_quotes('global-metrics')   |
+| /v1/tools/price-conversion        | -                 |
+| /v1/blockchain/statistics/latest  | -                 |
+| /v1/fiat/map                      | map('fiat')       |
+| /v1/partners/flipside-crypto/fcas/listings/latest | - |
+| /v1/partners/flipside-crypto/fcas/quotes/latest   | - |
+| /v1/key/info                      | key_info() or info('key') |
 
 **Note**: Every method takes in parameters as kwargs. `-` would be added later.
 
@@ -78,7 +78,7 @@ cmc = CoinMarketCap(YOUR_API_KEY)
 ```
 
 ### Passing parameters
-Some functions require parameters to send along with the request. This can be passed in as keyword arguments.
+You can pass parameters to send along with the request in each method. This can be passed in as keyword arguments.
 
 #### keyword arguments
 ```python
@@ -86,13 +86,15 @@ cmc.info('exchange', id=[2,270])
 ```
 
 #### kwargs as dict
+Get all listing with price between $1 and $10, and market cap between $1B and $10B.
 ```python
 parameters = {
-	'price_min': 10000,
-	'price_max': 30000,
-	'convert': ['USD', 'EUR', 'GBP']
+    'price_min': 1,
+    'price_max': 10,
+    'market_cap_min': 1000000000,
+    'market_cap_max': 10000000000
 }
-cmc.listings(**parameters)
+data = cmc.listings(**parameters)
 ```
 
 [Documentation here]()
