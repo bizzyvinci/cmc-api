@@ -100,6 +100,7 @@ parameters = {
 data = cmc.listings(**parameters)
 ```
 
-[Documentation here]()
+## Foot note
+* [**Coinmarketcap best practices**](https://coinmarketcap.com/api/documentation/v1/#section/Best-Practices)
 
-[coinmarketcap best practices](https://coinmarketcap.com/api/documentation/v1/#section/Best-Practices)
+* I need help with building documentation with sphinx. I just couldn't get it right. So please contribute if you can.

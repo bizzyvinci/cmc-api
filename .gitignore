@@ -6,3 +6,6 @@ dist
 *.egg-info
 # Caches
 *__pycache__
+
+# The messy documentation I'm working on
+docs
