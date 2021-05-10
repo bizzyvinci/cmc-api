@@ -71,6 +71,8 @@ class CoinMarketCap:
         'fiat': 'fiat',
         'key': 'key',
         'global-metrics': 'global-metrics',
+        'latest': 'latest',
+        'historical': 'historical',
     }
 
     def __init__(self, api_key=os.getenv('CMC_PRO_API_KEY'), root='pro'):
@@ -379,4 +381,21 @@ class CoinMarketCap:
         """
         url = self._insert_cat(self.BASE_URL + '/{}/quotes/historical', cat,
               ['crypto', 'exchange', 'global-metrics'])
+        return self._get_url(url, parameters)
+
+    @parameters_parser('cat')
+    def ohlcv(self, cat='latest', **parameters):
+        """
+        Get the latest or historical OHLCV of coin(s).
+        """
+        url = self._insert_cat(self.BASE_URL + '/cryptocurrency/ohlcv/{}',
+            cat, ['latest', 'historical'])
+        return self._get_url(url, parameters)
+
+    @parameters_parser('cat')
+    def market_pairs(self, cat='crypto', **parameters):
+        """
+        Get the latest market-pairs of cryptocurrency or exchange.
+        """
+        url = self._insert_cat(self.BASE_URL + '/{}/market-pairs/latest', cat)
         return self._get_url(url, parameters)
