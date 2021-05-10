@@ -11,19 +11,19 @@ This is up to date for coinmarketcap pro-api v1.27.0.
 | /v1/cryptocurrency/info           | info()            |
 | /v1/cryptocurrency/listings/latest| listings()        |
 | /v1/cryptocurrency/listings/historical| historical_listings() |
-| /v1/cryptocurrency/quotes/latest  | quotes()          |
+| /v1/cryptocurrency/quotes/latest      | quotes()              |
 | /v1/cryptocurrency/quotes/historical  | historical_quotes()   |
-| /v1/cryptocurrency/market-pairs/latest| -             |
-| /v1/cryptocurrency/ohlcv/latest   | -                 |
-| /v1/cryptocurrency/ohlcv/historical   | -             |
-| /v1/cryptocurrency/price-performance-stats/latest | - |
-| /v1/exchange/map                  | map('exchange')   |
-| /v1/exchange/info                 | info('exchange')  |
-| /v1/exchange/listings/latest      | listings('exchange')  |
+| /v1/cryptocurrency/market-pairs/latest| market_pairs()        |
+| /v1/cryptocurrency/ohlcv/latest       | ohlcv()               |
+| /v1/cryptocurrency/ohlcv/historical   | ohlcv('historical')   |
+| /v1/cryptocurrency/price-performance-stats/latest | -         |
+| /v1/exchange/map                  | map('exchange')           |
+| /v1/exchange/info                 | info('exchange')          |
+| /v1/exchange/listings/latest      | listings('exchange')      |
 | /v1/exchange/listings/historical  | historical_listings('exchange')   |
-| /v1/exchange/quotes/latest        | quotes('exchange')|
+| /v1/exchange/quotes/latest        | quotes('exchange')        |
 | /v1/exchange/quotes/historical    | historical_quotes('exchange') |
-| /v1/exchange/market-pairs/latest  | -                 |
+| /v1/exchange/market-pairs/latest  | market_pairs('exchange')  |
 | /v1/global-metrics/quotes/latest  | quotes('global-metrics')  |
 | /v1/global-metrics/quotes/historical  | historical_quotes('global-metrics')   |
 | /v1/tools/price-conversion        | -                 |
