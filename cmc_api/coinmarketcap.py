@@ -405,4 +405,10 @@ class CoinMarketCap:
         url = self._insert_cat(self.BASE_URL + '/{}/market-pairs/latest', cat)
         return self._get_url(url, parameters)
 
-    
+    @parameters_parser()
+    def price_performance_stats(self, **parameters):
+        """
+        Get price-performance-stats of coin(s).
+        """
+        url = self.BASE_URL + '/cryptocurrency/price-performance-stats/latest'
+        return self._get_url(url, parameters)

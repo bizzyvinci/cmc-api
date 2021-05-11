@@ -16,7 +16,7 @@ This is up to date for coinmarketcap pro-api v1.27.0.
 | /v1/cryptocurrency/market-pairs/latest| market_pairs()        |
 | /v1/cryptocurrency/ohlcv/latest       | ohlcv()               |
 | /v1/cryptocurrency/ohlcv/historical   | historical_ohlcv()    |
-| /v1/cryptocurrency/price-performance-stats/latest | -         |
+| /v1/cryptocurrency/price-performance-stats/latest | price_performance_stats() |
 | /v1/exchange/map                  | map('exchange')           |
 | /v1/exchange/info                 | info('exchange')          |
 | /v1/exchange/listings/latest      | listings('exchange')      |
