@@ -73,9 +73,11 @@ class CoinMarketCap:
         'global-metrics': 'global-metrics',
     }
 
-    def __init__(self, api_key=os.getenv('CMC_PRO_API_KEY'), root='pro'):
+    def __init__(self, api_key=None, root='pro'):
         self.BASE_URL = 'https://{}-api.coinmarketcap.com/v1'.format(root)
         if root=='pro':
+            if api_key is None:
+                api_key = os.getenv('CMC_PRO_API_KEY')
             if not api_key:
                 message = "No key is provided for pro-api."
                 raise CMCAPIException(message)
