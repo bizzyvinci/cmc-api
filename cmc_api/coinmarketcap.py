@@ -82,7 +82,7 @@ class CoinMarketCap:
                 message = "No key is provided for pro-api."
                 raise CMCAPIException(message)
         else:
-            api_key = None
+            api_key = 'b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c'
         self.api_key = api_key
         self.session = self._init_session(api_key)
 
@@ -414,3 +414,36 @@ class CoinMarketCap:
         """
         url = self.BASE_URL + '/cryptocurrency/price-performance-stats/latest'
         return self._get_url(url, parameters)
+
+    @parameters_parser()
+    def price_conversion(self, **parameters):
+        """
+        Convert an amount of one crypto or fiat into another.
+        """
+        url = self.BASE_URL + '/tools/price-conversion'
+        return self._get_url(url, parameters)
+    
+    @parameters_parser()
+    def blockchain_stats(self, **parameters):
+        """
+        Get the latest blockchain statistics for 1 or more blockchains.
+        """
+        url = self.BASE_URL + '/blockchain/statistics/latest'
+        return self._get_url(url, parameters)
+    
+    @parameters_parser()
+    def flipside_fcas_listings(self, **parameters):
+        """
+        Get the list of FCAS scores of all crypto by flipside.
+        """
+        url = self.BASE_URL + '/partners/flipside-crypto/fcas/listings/latest'
+        return self._get_url(url, parameters)
+    
+    @parameters_parser()
+    def flipside_fcas_quotes(self, **parameters):
+        """
+        Get the latest FCAS score of 1 or more crypto.
+        """
+        url = self.BASE_URL + '/partners/flipside-crypto/fcas/quotes/latest'
+        return self._get_url(url, parameters)
+    

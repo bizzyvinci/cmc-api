@@ -26,11 +26,11 @@ This is up to date for coinmarketcap pro-api v1.27.0.
 | /v1/exchange/market-pairs/latest  | market_pairs('exchange')  |
 | /v1/global-metrics/quotes/latest  | quotes('global-metrics')  |
 | /v1/global-metrics/quotes/historical  | historical_quotes('global-metrics')   |
-| /v1/tools/price-conversion        | -                 |
-| /v1/blockchain/statistics/latest  | -                 |
+| /v1/tools/price-conversion        | price_conversion  |
+| /v1/blockchain/statistics/latest  | blockchain_stats  |
 | /v1/fiat/map                      | map('fiat')       |
-| /v1/partners/flipside-crypto/fcas/listings/latest | - |
-| /v1/partners/flipside-crypto/fcas/quotes/latest   | - |
+| /v1/partners/flipside-crypto/fcas/listings/latest | flipside_fcas_listings |
+| /v1/partners/flipside-crypto/fcas/quotes/latest   | flipside_fcas_quotes   |
 | /v1/key/info                      | key_info() or info('key') |
 
 **Note**: Every method takes in parameters as kwargs. `-` would be added later.
